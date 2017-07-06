@@ -1,6 +1,6 @@
 {
-	"name": "silverstripe-module/skeleton",
-	"description": "A skeleton for SilverStripe modules.",
+	"name": "qunabu/silverstripe-qunabu-helpers",
+	"description": "A set of helpers for developing rich silverstripe themes",
 	"keywords": ["silverstripe", "CMS"],
 	"license": "BSD-3-Clause",
 	"minimum-stability": "dev"
