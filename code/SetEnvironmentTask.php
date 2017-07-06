@@ -9,11 +9,28 @@
 class SetEnvironmentTask extends BuildTask {
   public function run($request) {
 
-    //global $databaseConfig;
+    $file_config = BASE_PATH.DIRECTORY_SEPARATOR.'mysite/_config.php';
+    $env_file = BASE_PATH.DIRECTORY_SEPARATOR.'/_ss_environment.php';
 
-    //var_dump($databaseConfig);
+    if (is_file($env_file)) {
+      die('is_file($env_file)');
+    }
 
-    //$dbName = $databaseConfig['database'];
-    //$dbName = $databaseConfig['database'];
+    global $databaseConfig;
+
+    $helpfiles = BASE_PATH.DIRECTORY_SEPARATOR.SS_QUNABU_DIR.DIRECTORY_SEPARATOR.'help-files'.DIRECTORY_SEPARATOR;
+
+    $fcontent = file_get_contents($helpfiles.'_ss_environment.php');
+
+    $fcontent = str_replace('||SS_DATABASE_SERVER||', $databaseConfig['server'], $fcontent);
+    $fcontent = str_replace('||SS_DATABASE_USERNAME||', $databaseConfig['username'], $fcontent);
+    $fcontent = str_replace('||SS_DATABASE_NAME||', $databaseConfig['database'], $fcontent);
+    $fcontent = str_replace('||SS_DATABASE_PASSWORD||', $databaseConfig['password'], $fcontent);
+
+    file_put_contents($env_file, $fcontent);
+    file_put_contents($file_config, file_get_contents($helpfiles.'_config.php'));
+
+    echo 'SetEnvironmentTask done';
+
   }
 } 
