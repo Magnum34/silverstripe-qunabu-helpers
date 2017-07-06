@@ -1,0 +1,6 @@
+Image:
+  extensions:
+    - ImageHelperExtension
+Page:
+  extensions:
+    - PageHelperExtension
