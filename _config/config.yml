@@ -1,6 +1,13 @@
 Image:
   extensions:
     - ImageHelperExtension
+    - Greyscaled
 Page:
   extensions:
     - PageHelperExtension
+Date:
+  extensions:
+    - DateExtension
+HTMLText:
+  extensions:
+    - HTMLTextExtension
