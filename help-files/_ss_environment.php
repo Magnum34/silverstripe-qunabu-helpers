@@ -6,7 +6,7 @@ define('SS_ENVIRONMENT_TYPE', 'dev');
 define('SS_DATABASE_SERVER', '||SS_DATABASE_SERVER||');
 define('SS_DATABASE_USERNAME', '||SS_DATABASE_USERNAME||');
 define('SS_DATABASE_NAME', '||SS_DATABASE_NAME||');
-define('SS_DATABASE_PASSWORD', '||SS_DATABASE_NAME||');
+define('SS_DATABASE_PASSWORD', '||SS_DATABASE_PASSWORD||');
 
 /* Configure a default username and password to access the CMS on all sites in this environment. */
 //define('SS_DEFAULT_ADMIN_USERNAME', 'username');
