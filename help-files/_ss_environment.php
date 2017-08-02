@@ -14,4 +14,8 @@ define('SS_DATABASE_PASSWORD', '||SS_DATABASE_NAME||');
 
 global $_FILE_TO_URL_MAPPING ;
 
+/* If you want to keep a single manifest file then you can hard code this in your _config or _ss_environment.
+Qunabu. This is requir */
+//define('MANIFEST_FILE', TEMP_FOLDER . "/manifest-main");
+
 //$_FILE_TO_URL_MAPPING['/Users/qunabu/Desktop/localhost/stallan-brand'] = 'http://stallan-brand.loc/';
