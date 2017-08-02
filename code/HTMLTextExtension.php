@@ -51,4 +51,11 @@ JS;
     return $html.$js;
 
   }
+
+  public function StripStyle() {
+    $input = $this->owner->RAW();
+    $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
+    $output = preg_replace("/(<[^>]+) style='.*?'/i", '$1', $output);
+    return $output;
+  }
 } 
