@@ -8,6 +8,7 @@
 
 class HTMLTextExtension extends DataExtension {
   public function getProtectEmails() {
+
     /** @var HTMLText $html */
     $html = $this->owner->RAW();;
     $pattern = "/\<a.+?href=\"mailto:(.*?)\".+?\<\/a\>/";
