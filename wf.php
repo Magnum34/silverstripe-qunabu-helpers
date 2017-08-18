@@ -12,7 +12,7 @@ if (PHP_SAPI === 'cli') {
   die('nope');
 }
 
-include(__DIR__ . '/vendor/autoload.php');
+include(__DIR__ . '/../vendor/autoload.php');
 
 function console_log($msg) {
   echo $msg."\n";
