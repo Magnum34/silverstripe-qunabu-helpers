@@ -16,7 +16,7 @@ class PageHelperExtension extends DataExtension {
   public function getJavaScriptLibFiles() {
     $files = glob( BASE_PATH.'/'.$this->owner->ThemeDir().'/javascript/lib/*.js' );
     usort($files, function($a, $b) {
-      return strcmp($b, $a);
+      return strcmp($a, $b);
     });
     $result = new ArrayList();
     foreach($files as $file) {
