@@ -1,0 +1,284 @@
+[
+    {
+        "name": "phpxmlrpc/phpxmlrpc",
+        "version": "4.0.0",
+        "version_normalized": "4.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gggeek/phpxmlrpc.git",
+            "reference": "679eacd661962f353a809ab66e83a86233f28bcc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/gggeek/phpxmlrpc/zipball/679eacd661962f353a809ab66e83a86233f28bcc",
+            "reference": "679eacd661962f353a809ab66e83a86233f28bcc",
+            "shasum": ""
+        },
+        "require": {
+            "ext-xml": "*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "docbook/docbook-xsl": "~1.78",
+            "ext-curl": "*",
+            "ext-mbstring": "*",
+            "indeyets/pake": "~1.99",
+            "phpdocumentor/phpdocumentor": "2.*",
+            "phpunit/phpunit": ">=4.0.0",
+            "phpunit/phpunit-selenium": "*"
+        },
+        "suggest": {
+            "ext-curl": "Needed for HTTPS and HTTP 1.1 support, NTLM Auth etc...",
+            "ext-mbstring": "Needed to allow reception of requests/responses in character sets other than ASCII,LATIN-1,UTF-8",
+            "ext-zlib": "Needed for sending compressed requests and receiving compressed responses, if cURL is not available"
+        },
+        "time": "2016-01-20 23:28:09",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpXmlRpc\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "A php library for building xmlrpc clients and servers",
+        "homepage": "http://gggeek.github.io/phpxmlrpc/",
+        "keywords": [
+            "webservices",
+            "xmlrpc"
+        ]
+    },
+    {
+        "name": "fortytwo-studio/webfaction-php",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fortytwostudio/webfaction-php.git",
+            "reference": "a4b125845159641571512d29513538e4b48af9e6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fortytwostudio/webfaction-php/zipball/a4b125845159641571512d29513538e4b48af9e6",
+            "reference": "a4b125845159641571512d29513538e4b48af9e6",
+            "shasum": ""
+        },
+        "require": {
+            "phpxmlrpc/phpxmlrpc": "4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~6"
+        },
+        "time": "2017-08-01 13:16:06",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "FortyTwoStudio\\WebFactionPHP\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Billy Fagan",
+                "email": "billy@fortytwo.studio"
+            }
+        ],
+        "description": "PHP wrapper for the Webfaction XML-RPC API"
+    },
+    {
+        "name": "symfony/finder",
+        "version": "2.8.x-dev",
+        "version_normalized": "2.8.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/finder.git",
+            "reference": "4f4e84811004e065a3bb5ceeb1d9aa592630f9ad"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/4f4e84811004e065a3bb5ceeb1d9aa592630f9ad",
+            "reference": "4f4e84811004e065a3bb5ceeb1d9aa592630f9ad",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "time": "2017-06-01 20:52:29",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Finder\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Finder Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "youknowriad/oossh",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/youknowriad/OOSSH.git",
+            "reference": "0ea51faae212679db1e642748ec157a777dc7fbd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/youknowriad/OOSSH/zipball/0ea51faae212679db1e642748ec157a777dc7fbd",
+            "reference": "0ea51faae212679db1e642748ec157a777dc7fbd",
+            "shasum": ""
+        },
+        "require": {
+            "symfony/finder": ">=2.1.0,<3.0"
+        },
+        "time": "2012-10-16 08:12:30",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "OOSSH": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yohan Giarelli",
+                "email": "yohan@giarel.li",
+                "homepage": "http://yohan.giarel.li"
+            }
+        ],
+        "description": "Object Oriented SSH for PHP",
+        "homepage": "https://github.com/frequence-web/OOSSH",
+        "keywords": [
+            "ssh"
+        ]
+    },
+    {
+        "name": "phpseclib/phpseclib",
+        "version": "2.0.x-dev",
+        "version_normalized": "2.0.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phpseclib/phpseclib.git",
+            "reference": "a9cd28d8fdbddf81bb08b76a3d9ad4406b7a8e27"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/a9cd28d8fdbddf81bb08b76a3d9ad4406b7a8e27",
+            "reference": "a9cd28d8fdbddf81bb08b76a3d9ad4406b7a8e27",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phing/phing": "~2.7",
+            "phpunit/phpunit": "~4.0",
+            "sami/sami": "~2.0",
+            "squizlabs/php_codesniffer": "~2.0"
+        },
+        "suggest": {
+            "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+            "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+            "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+            "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+        },
+        "time": "2017-08-09 02:53:37",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "phpseclib/bootstrap.php"
+            ],
+            "psr-4": {
+                "phpseclib\\": "phpseclib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jim Wigginton",
+                "email": "terrafrost@php.net",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Patrick Monnerat",
+                "email": "pm@datasphere.ch",
+                "role": "Developer"
+            },
+            {
+                "name": "Andreas Fischer",
+                "email": "bantu@phpbb.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Hans-Jürgen Petrich",
+                "email": "petrich@tronic-media.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Graham Campbell",
+                "email": "graham@alt-three.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+        "homepage": "http://phpseclib.sourceforge.net",
+        "keywords": [
+            "BigInteger",
+            "aes",
+            "asn.1",
+            "asn1",
+            "blowfish",
+            "crypto",
+            "cryptography",
+            "encryption",
+            "rsa",
+            "security",
+            "sftp",
+            "signature",
+            "signing",
+            "ssh",
+            "twofish",
+            "x.509",
+            "x509"
+        ]
+    }
+]

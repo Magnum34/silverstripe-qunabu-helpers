@@ -14,8 +14,32 @@ if (PHP_SAPI === 'cli') {
 
 include(__DIR__ . '/vendor/autoload.php');
 
+function console_log($msg) {
+  echo $msg."\n";
+}
+
+function eoltrim($string) {
+  return  trim(str_replace(array("\n","\r"), '', $string));
+}
+
+function generateRandomPassword() {
+  //Initialize the random password
+  $password = '';
+
+  //Initialize a random desired length
+  $desired_length = rand(8, 12);
+
+  for($length = 0; $length < $desired_length; $length++) {
+    //Append a random ASCII character (including symbols)
+    $password .= chr(rand(32, 126));
+  }
+
+  return $password;
+}
+
 use FortyTwoStudio\WebFactionPHP\WebFactionClient;
 use FortyTwoStudio\WebFactionPHP\WebFactionException;
+use phpseclib\Net;
 
 
     try
@@ -33,53 +57,140 @@ use FortyTwoStudio\WebFactionPHP\WebFactionException;
 
 
       if ($login && $password && $projectname) {
-        echo "logging in.... please wait \n ";
+        console_log("logging in.... please wait");
       } else {
-        die ('must provide  $login && $password && $projectname'."\n");
+        console_log('must provide  $login && $password && $projectname');
       }
 
+      //** loggin with SSH and trying to clone repo */
+
+      $ssh = new  Net\SSH2('qunabu.webfactional.com');
+      if (!$ssh->login($login, $password)) {
+        console_log('Login Failed');
+      }
 
       // create a connection to the API, use your own credentials here, obvs
       $wf = new WebFactionClient($login, $password);
 
       $ip = '185.119.174.181';
 
+      //$db_pass = WebFactionClient::generatePassword(21); //only in php7
+      $db_pass = generateRandomPassword();
+
+
+      $exists = array(
+        'app'=>false,
+        'db_user'=>false,
+        'db'=>false,
+        'website'=>false,
+        'domain'=>false,
+      );
+
       $apps = $wf->listApps();
 
-      $exsists = false;
       foreach($apps as $app) {
         if ($app['name'] == $projectname) {
-          $exsists = true;
+          $exists['app'] = true;
         }
       }
 
-      $db_pass = WebFactionClient::generatePassword(21);
-
-
-      if ($exsists) {
-        echo "PROJECT exisits:\n";
-        $wf->changeDbUserPassword($projectname, $db_pass, 'mysql');
-      } else {
-
-
-        $app = $wf->createApp($projectname,'static_php56');
-
-        $domain = $wf->createDomain($projectname.'.qunabu.com');
-
-        $website = $wf->createWebsite($projectname, '185.119.174.181', FALSE, [$projectname . '.qunabu.com'], [
-            $projectname,
-            '/'
-          ]);
-
-        $user = $wf->createDbUser($projectname,$db_pass,'mysql');
-
-        // https://docs.webfaction.com/xmlrpc-api/apiref.html#method-create_db
-        $database = $wf->createDb($projectname, 'mysql', '', $projectname);
-
-        // https://docs.webfaction.com/xmlrpc-api/apiref.html#method-change_db_user_password
-        //otherwise it doesn't seem to use it. Possibly because we're creating the user at the same time as the DB above
-
+      $websites = $wf->listWebsites();
+      foreach($websites as $website) {
+        if ($website['name'] == $projectname) {
+          $exists['website'] = true;
+        }
       }
+
+      $domains = $wf->listDomains();
+      foreach($domains as $domain) {
+        if ($domain['domain'] == 'qunabu.com') {
+          $exists['domain'] = in_array($projectname, $domain['subdomains']);
+        }
+      }
+
+      $db_users = $wf->listDbUsers();
+      foreach($db_users as $db_user) {
+        if ($db_user['username'] == $projectname) {
+          $exists['db_user'] =  true;
+        }
+      }
+
+      $dbs = $wf->listDbs();
+      foreach($dbs as $db) {
+        if ($db['name'] == $projectname) {
+          $exists['db'] =  true;
+        }
+      }
+
+
+      //DB USER
+      if (!$exists['db_user']) {
+        console_log('user doesn`t $exists, creating one....');
+        $user = $wf->createDbUser($projectname,$db_pass,'mysql');
+      } else {
+        console_log('user exists, setting up new password one....');
+        $user = $wf->changeDbUserPassword($projectname,$db_pass,'mysql');
+      }
+
+
+      //DB
+      if (!$exists['db']) {
+        console_log('db doesn`t $exists, creating one....');
+        $database = $wf->createDb($projectname, 'mysql', '', $projectname);
+      } else {
+        $user = $wf->grantDbPermissions($projectname,$projectname,'mysql');
+        console_log('db exists, Grant full database permissions to a user' );
+      }
+
+
+      //APP
+      if (!$exists['app']) {
+        console_log('app doesn`t $exists, creating one....');
+        $app = $wf->createApp($projectname,'static_php56');
+      } else {
+        console_log('app exists, nothing to do' );
+      }
+
+      //DOMAIN
+      if (!$exists['domain']) {
+        console_log('domain doesn`t $exists, creating qunabu subdomain....');
+        $domain = $wf->createDomain('qunabu.com', [$projectname]);
+      } else {
+        console_log('domain exists, nothing to do' );
+      }
+
+
+      //WEBSITE
+      if (!$exists['website']) {
+        console_log('website doesn`t $exists, creating one....');
+        $website = $wf->createWebsite($projectname, $ip, FALSE, [$projectname . '.qunabu.com'], [
+          $projectname,
+          '/'
+        ]);
+      } else {
+        /*
+        console_log('website  $exists, updating one....');
+        $website = $wf->updateWebsite($projectname, $ip, FALSE, [$projectname . '.qunabu.com'], [
+          [$projectname, '/'],
+          [$projectname, '/']
+        ])
+        */;
+        console_log('website  $exists, nothing to do ');
+      }
+
+      $isGit = eoltrim($ssh->exec("[ -d /home/qunabu/webapps/$projectname/.git ] && echo GIT || echo SHIT"));
+      $isIndex = eoltrim($ssh->exec("[ -e /home/qunabu/webapps/$projectname/index.html ] && echo GIT || echo SHIT"));
+
+      if ($isIndex == 'GIT') {
+        echo $ssh->exec("rm /home/qunabu/webapps/$projectname/index.html");
+      }
+
+      if ($isGit == 'SHIT') {
+        echo $ssh->exec("git clone -b develop git@git.qunabu.com:qunabuinteractive/$projectname.git /home/qunabu/webapps/$projectname");
+      }
+
+      echo $ssh->exec("cd /home/qunabu/webapps/$projectname && composer update");
+
 
 
       echo "PROJECT DETAILS:\n";

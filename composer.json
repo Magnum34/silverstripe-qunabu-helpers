@@ -4,5 +4,9 @@
 	"keywords": ["silverstripe", "CMS"],
 	"license": "BSD-3-Clause",
 	"minimum-stability": "dev",
-  "type": "silverstripe-module"
+  "type": "silverstripe-module",
+	"require": {
+		"fortytwo-studio/webfaction-php": "dev-master",
+		"phpseclib/phpseclib": "^2.0"
+	}
 }
