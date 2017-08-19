@@ -196,7 +196,7 @@ use phpseclib\Net;
         echo $ssh->exec("git clone -b develop git@git.qunabu.com:qunabuinteractive/$projectname.git /home/qunabu/webapps/$projectname");
       }
 
-      echo $ssh->exec("cd /home/qunabu/webapps/$projectname && composer update");
+      echo $ssh->exec("cd /home/qunabu/webapps/$projectname && /usr/local/bin/php56 /home/qunabu/composer.phar update");
 
 
 
