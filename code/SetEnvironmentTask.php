@@ -10,6 +10,7 @@ class SetEnvironmentTask extends BuildTask {
   public function run($request) {
 
     $file_config = BASE_PATH.DIRECTORY_SEPARATOR.'mysite/_config.php';
+    $livefile_config = BASE_PATH.DIRECTORY_SEPARATOR.'mysite/live_config.php';
     $env_file = BASE_PATH.DIRECTORY_SEPARATOR.'/_ss_environment.php';
 
     if (is_file($env_file)) {
@@ -29,7 +30,7 @@ class SetEnvironmentTask extends BuildTask {
 
     file_put_contents($env_file, $fcontent);
     file_put_contents($file_config, file_get_contents($helpfiles.'_config.php'));
-    file_put_contents($file_config, file_get_contents($helpfiles.'live_config.php'));
+    file_put_contents($livefile_config, file_get_contents($helpfiles.'_config.php'));
 
     echo 'SetEnvironmentTask done';
 
