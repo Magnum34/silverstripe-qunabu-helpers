@@ -12,9 +12,16 @@ if (PHP_SAPI === 'cli') {
   die('nope');
 }
 
-include(__DIR__ . '/../vendor/autoload.php');
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+  include(__DIR__ . '/../vendor/autoload.php');
+} else if (is_file(__DIR__ . '/vendor/autoload.php')) {
+  include(__DIR__ . '/vendor/autoload.php');
+}
 
-function console_log($msg) {
+
+
+
+  function console_log($msg) {
   echo $msg."\n";
 }
 
@@ -203,6 +210,9 @@ use phpseclib\Net;
       echo "mysql passwrod : $db_pass \n";
       echo "ip: $ip \n";
       echo "path: /home/qunabu/webapps/$projectname \n";
+      echo "visit http://$projectname.qunabu.com/install.php to install Silverstripe \n";
+      echo "once installation is ready visit to set up _env file \n";
+      echo "visit http://$projectname.qunabu.com/dev/tasks/SetEnvironmentTask \n";
 
 
     } catch (WebFactionException $e)
