@@ -198,6 +198,17 @@ use phpseclib\Net;
 
       echo $ssh->exec("cd /home/qunabu/webapps/$projectname && /usr/local/bin/php56 /home/qunabu/composer.phar update");
 
+      //setting build.sh
+
+      $build_sh = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'help-files'.DIRECTORY_SEPARATOR.'build.sh');
+      $build_sh = str_replace('PROJECTNAME', $projectname, $build_sh);
+      file_put_contents(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'build.sh',$build_sh);
+
+      //setting .gitlab-ci.yml
+
+      $gitlab_ci = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'help-files'.DIRECTORY_SEPARATOR.'.gitlab-ci.yml');
+      $gitlab_ci = str_replace('PROJECTNAME', $projectname, $gitlab_ci);
+      file_put_contents(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.gitlab-ci.yml',$gitlab_ci);
 
 
       echo "PROJECT DETAILS:\n";

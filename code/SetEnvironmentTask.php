@@ -29,6 +29,7 @@ class SetEnvironmentTask extends BuildTask {
 
     file_put_contents($env_file, $fcontent);
     file_put_contents($file_config, file_get_contents($helpfiles.'_config.php'));
+    file_put_contents($file_config, file_get_contents($helpfiles.'live_config.php'));
 
     echo 'SetEnvironmentTask done';
 
