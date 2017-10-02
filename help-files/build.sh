@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd /home/qunabu/webapps/PROJECTNAME
-#git pull
+git pull
 git fetch --all
 git checkout --force "develop"
 cp /home/qunabu/webapps/PROJECTNAME/mysite/live_config.php /home/qunabu/webapps/PROJECTNAME/mysite/_config.php
